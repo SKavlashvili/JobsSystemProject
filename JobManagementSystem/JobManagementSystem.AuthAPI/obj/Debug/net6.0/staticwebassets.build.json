@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "vyjRDl645gRLSH3CB3gLa2X9uOCMM23gTBst1hLNXP0=",
+  "Source": "JobManagementSystem.AuthAPI",
+  "BasePath": "_content/JobManagementSystem.AuthAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

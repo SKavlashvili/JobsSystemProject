@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\JobManagementSystem.AuthAPI.props" />
+</Project>
