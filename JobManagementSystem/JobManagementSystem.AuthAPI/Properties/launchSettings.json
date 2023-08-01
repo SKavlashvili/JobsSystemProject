@@ -11,7 +11,7 @@
     "JobManagementSystem.AuthAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "http://localhost:5210",
       "launchUrl": "swagger/index.html",
       "environmentVariables": {

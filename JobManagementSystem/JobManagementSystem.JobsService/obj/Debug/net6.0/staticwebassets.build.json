@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "5eXS3hxS48k4FiEUkFSeu9AvOJ9HIJL/JVvoGEITeIk=",
+  "Source": "JobManagementSystem.JobsService",
+  "BasePath": "_content/JobManagementSystem.JobsService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

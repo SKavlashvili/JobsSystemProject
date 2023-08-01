@@ -18,13 +18,13 @@ namespace JobManagementSystem.AuthAPI.Presentation
             _authService = authService;
         }
         [HttpPost("/[action]")]
-        public async Task<IActionResult> RegisterUser(UserRegistrationModel newUser)
+        public async Task<IActionResult> RegisterUser([FromBody] UserRegistrationModel newUser)
         {
             ValidationResult valResult = _newUserValidator.Validate(newUser);
             if (!valResult.IsValid) return BadRequest(valResult.Errors);
 
 
-            return Ok(await _authService.RegisterNewUser(newUser.Adapt<NewUserRequest>()));
+            return Ok(new { AddedUserID = await _authService.RegisterNewUser(newUser.Adapt<NewUserRequest>())});
         }
 
     }

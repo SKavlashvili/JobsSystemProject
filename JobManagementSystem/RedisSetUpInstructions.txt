@@ -1,0 +1,177 @@
+=============================================QUEUE INSTANCE
+sandro@Sandro:~$ redis-cli -p 6379
+127.0.0.1:6379> config set save ""
+OK
+127.0.0.1:6379> config set appendonly yes
+OK
+127.0.0.1:6379> config set appendfsync everysec #This parameter says that redis will 
+#save data in append only log  in every 1 second. it will give us good durability
+OK
+127.0.0.1:6379> config get appendfsync
+1) "appendfsync"
+2) "everysec"
+127.0.0.1:6379> exit
+sandro@Sandro:~$ redis-cli
+127.0.0.1:6379> config rewrite
+OK
+127.0.0.1:6379>
+
+
+=============================================CACHE INSTANCE
+//Database
+
+--TABLES
+
+create database JobManagmentSystemAuthService;
+
+
+create table users
+(
+    user_id serial primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
+    email varchar(100) not null unique,
+    password text not null,
+    is_employer bool not null default false,
+    company_name varchar(100) default null
+);
+create table degrees
+(
+	degree_name varchar(100) primary key
+);
+
+create table education
+(
+	education_name varchar(100) primary key
+);
+
+create table profession
+(
+	proffesion_name varchar(100) primary key
+);
+
+create table skills
+(
+	skill_name varchar(100) primary key
+);
+--Helper QUERIES
+
+select * from users;
+select * from degrees;
+select * from education;
+select * from profession;
+select * from skills;
+select * from cvs;
+
+
+select * from cv_skill;
+
+select * from job_skills;
+
+
+SELECT 
+	SCORED_DATA.user_id as UserId,
+	SCORED_DATA.user_score as UserScore,
+	u.phone_number as PhoneNumber,
+	u.education as Education,
+	u.degree as Degree,
+	u.profession as Profession,
+	u.education_started as EducationStarted,
+	u.education_ended as EducationEnded
+FROM 
+(
+	SELECT 
+	  c.user_id AS user_id, 
+	  SUM((CAST(c.experience AS DECIMAL)/ j.requestedexpirience) * weight) AS user_score
+	FROM 
+	  cv_skill AS c 
+	  INNER JOIN job_skills as j on c.skill_name = j.skill_name 
+	  AND j.job_id = 1
+	WHERE 
+	  c.user_id = 12 AND c.is_deleted = false GROUP BY c.user_id
+) AS SCORED_DATA
+INNER JOIN
+cvs AS u
+ON u.user_id = SCORED_DATA.user_id;
+
+select * from cv_skill;
+update cv_skill set is_deleted = true where experience = 1;
+
+select * from cv_skill as c inner join job_skills as j on c.skill_name = j.skill_name and j.job_id = 1 where c.user_id = 12;
+
+update users set company_name = null where user_id = 1;
+
+======================================================Day2
+--TABLES
+
+create database JobManagmentSystemAuthService;
+
+
+create table users
+(
+    user_id serial primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
+    email varchar(100) not null unique,
+    password text not null,
+    is_employer bool not null default false,
+    company_name varchar(100) default null
+);
+create table degrees
+(
+	degree_name varchar(100) primary key
+);
+
+create table education
+(
+	education_name varchar(100) primary key
+);
+
+create table profession
+(
+	proffesion_name varchar(100) primary key
+);
+
+create table skills
+(
+	skill_name varchar(100) primary key
+);
+--Helper QUERIES
+
+select * from users;
+select * from degrees;
+select * from education;
+select * from profession;
+select * from skills;
+select
+	job_id as JobId,
+	user_id as UserId,
+	expire_date as ExpireDate,
+	job_title as JobTitle
+from
+	jobs;
+	
+	
+	
+	---------------------------------------------
+	select * from jobs;
+select skill_name from job_skills where job_id = 1;
+update users set company_name = null where user_id = 1;
+
+select user_id from jobs where job_id = 1
+
+
+------------------
+delete from users where 1 = 1;
+delete from jobs where 1 =1 ;
+delete from job_skills where  1=1;
+delete from cvs where 1=1;
+delete from cv_skill where 1=1;
+select * from users;
+select * from jobs;
+select * from job_skills;
+select * from cvs;
+select * from cv_skill;
+update cvs set is_deleted = false where user_id = 16;
+
+========================================================================
